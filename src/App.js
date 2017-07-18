@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Login from './components/Login';
 import { graphql, gql } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
+import PostsContainer from './components/PostsContainer';
 
 class App extends React.Component {
   static propTypes = {
@@ -19,18 +20,21 @@ class App extends React.Component {
   };
 
   renderLoggedIn = () => {
-    return <div>Logged in!</div>;
+    return <PostsContainer />;
   };
 
   container = {
+    position: 'absolute',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginTop: '200px'
+    marginTop: '200px',
+    width: '100%',
+    height: '100%'
   };
 
   render() {
-    if (this.props.data.loading) <div>Loading...</div>;
+    if (this.props.data.loading) return <div>Loading...</div>;
     return (
       <div style={this.container}>
         {this._isLoggedIn() ? this.renderLoggedIn() : this.renderLoggedOut()}
